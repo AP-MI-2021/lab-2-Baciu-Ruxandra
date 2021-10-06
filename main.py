@@ -69,10 +69,40 @@ def test_get_n_choose_k():
 test_get_n_choose_k()
 
 
+def is_prime(n):
+  if n==2:
+     return True
+  if n<2:
+     return False
+  if n%2==0:
+      return False
+  for i in range(3,n//2+1,2):
+      if n%i==0:
+         return False
+  return True
+
+
+def get_largest_prime_below(n):
+    if n==2:
+        return "Nu exista un numar prim mai mic decat numarul introdus!"
+    if n<2:
+        return "Introduceti o valoare mai mare decat 2!"
+    n=n-1
+    while is_prime(n) is False:
+        n-=1
+    return n
+
+def test_get_largest_prime_below():
+    assert get_largest_prime_below(14)==13
+    assert get_largest_prime_below(21)==19
+    assert get_largest_prime_below(3)==2
+test_get_largest_prime_below()
+
 
 def print_meniu():
     print("1. Transformă un număr dat din baza 2 în baza 16. ")
     print("2. Calculează combinări de n luate câte k")
+    print("3. Găsește ultimul număr prim mai mic decât un număr dat.")
     print("x. Iesire")
 
 def main():
@@ -88,6 +118,10 @@ def main():
         k=int(input('luate cate : '))
         print('Rezultatul  este: ')
         print(get_n_choose_k(n,k))
+    elif option=='3':
+        n=int(input("Introduceti numarul: "))
+        print("Raspuns: ")
+        print(get_largest_prime_below(n))
     elif option == 'x':
         break
     else:
